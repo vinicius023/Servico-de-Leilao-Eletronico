@@ -12,11 +12,13 @@ public class Cli {
 	}
 	
 	public ArrayList<String> login() {
+		scan = new Scanner(System.in);
 		System.out.println("Usuário: ");
 		String user = scan.nextLine();
 		System.out.println("Senha: ");
 		String senha = scan.nextLine();
-
+		scan = new Scanner(System.in);
+		
 		ArrayList<String> login = new ArrayList<>();
 		login.add(user);
 		login.add(senha);
