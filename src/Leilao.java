@@ -9,7 +9,7 @@ import java.util.*;
 import org.jgroups.blocks.*;
 
 
-public class ValChat extends ReceiverAdapter implements RequestHandler {
+public class Leilao extends ReceiverAdapter implements RequestHandler {
 
     JChannel canal;
     String nickname = "";
