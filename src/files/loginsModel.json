@@ -1,0 +1,8 @@
+{
+"logins": [
+        { "username":"RooD", "senha":"123"},
+      	{ "username":"Ana", "senha":"Pedro"},
+      	{ "username":"Maria", "senha":"m1m2"},
+      	{ "username":"DooR", "senha":"321"}
+    ]
+}

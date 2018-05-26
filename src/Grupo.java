@@ -1,3 +1,4 @@
+
 import org.jgroups.Address;
 
 import java.util.HashMap;
@@ -15,7 +16,6 @@ public class Grupo {
     public Grupo() {
         this.nome = "";
         this.adm = "";
-        this.membros = new HashMap<>();
     }
     public Grupo(String nome, String adm, HashMap<String,Address> membros) {
         this.nome = nome;

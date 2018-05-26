@@ -1,5 +1,8 @@
+package visao;
 import java.io.*;
 import java.util.*;
+
+import modelo.Login;
 
 public class Cli {
 
@@ -11,7 +14,7 @@ public class Cli {
 		return scan.nextInt();
 	}
 	
-	public ArrayList<String> login() {
+	public Login login() {
 		scan = new Scanner(System.in);
 		System.out.println("Usuário: ");
 		String user = scan.nextLine();
@@ -19,9 +22,7 @@ public class Cli {
 		String senha = scan.nextLine();
 		scan = new Scanner(System.in);
 		
-		ArrayList<String> login = new ArrayList<>();
-		login.add(user);
-		login.add(senha);
+		Login login = new Login(user,senha);
 
 		return login;
 	}

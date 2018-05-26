@@ -1,7 +1,8 @@
 import java.io.File;
 import java.util.HashMap;
 
-import users.Membro;
+import modelo.Item;
+import modelo.Membro;
 
 public class Sala {
 
