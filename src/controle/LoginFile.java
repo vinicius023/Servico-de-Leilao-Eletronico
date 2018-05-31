@@ -11,9 +11,9 @@ import org.json.simple.parser.JSONParser;
 
 import modelo.Login;
 
-public class FileJson {
+public class LoginFile {
 
-	public static final String PATH = "logins.json";
+	public static final String PATH = "/home/rood/Git/Servico-de-Leilao-Eletronico/src/files/logins.json";
 	
 	public ArrayList<Login> readLogins() {		
 		// instancia um novo JSONArray
@@ -82,6 +82,42 @@ public class FileJson {
 		}
 	}
 	
+	public void writeLogin(Login login) {		
+		// instancia um novo JSONArray
+		JSONArray obJson = new JSONArray();
+		// instancia um novo JSONObject
+		JSONObject jsonObject;
+		JSONObject aux = new JSONObject();
+
+		FileWriter writeFile = null;
+		
+		// Adiciona o novo login no array
+		ArrayList<Login> logins = readLogins();
+		logins.add(login);
+		
+		for (Login l : logins) {
+			jsonObject = new JSONObject();
+			//Armazena dados em um Objeto JSON
+			jsonObject.put("usuario", l.getUsuario());
+			jsonObject.put("senha", l.getSenha());
+			//Armazena Objeto JSON em um Array JSON
+			obJson.add(jsonObject);
+		}
+		//Armazena Array JSON em um Objeto JSON
+		aux.put("logins", obJson);
+		
+		try{
+			writeFile = new FileWriter(PATH);
+			//Escreve no arquivo conteudo do Objeto JSON
+			writeFile.write(aux.toJSONString());
+			writeFile.close();
+		}
+		catch(IOException e){
+			System.out.println("Erro ao escrever arquivo 'logins.json'! ");
+			e.printStackTrace();
+		}
+	}
+	
 	public boolean existeLogin(Login login) {		
 		// instancia um novo JSONArray
 		JSONArray obJson = new JSONArray();
@@ -100,9 +136,13 @@ public class FileJson {
 			// Percorre todos os logins
 			for (int i = 0; i < obJson.size(); i++) {
 				aux = (JSONObject) obJson.get(i);
+//				System.out.println("Usuario: "+aux.get("usuario")+"- Login: "+login.getUsuario()+"\nSenha: "+aux.get("senha"));
 				// garante login unico
-				if(aux.get("usuario") == login.getUsuario())
+				if(aux.get("usuario").equals(login.getUsuario())) {
+//					System.out.println("Usuario: "+aux.get("usuario")+" == "+login.getUsuario());
 					return true;
+				}
+					
 			}
 			return false;
 		} catch(Exception e) {

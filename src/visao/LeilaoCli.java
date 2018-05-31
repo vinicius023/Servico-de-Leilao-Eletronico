@@ -1,34 +1,13 @@
 package visao;
-import java.io.*;
-import java.util.*;
 
-import modelo.Login;
+import java.util.Scanner;
 
-public class Cli {
-
+public class LeilaoCli {
+	
 	Scanner scan = new Scanner(System.in);
 	
-	public int startLogin() {
-		System.out.println("1. Criar novo usuário");
-		System.out.println("2. Fazer login");
-		return scan.nextInt();
-	}
-	
-	public Login login() {
-		scan = new Scanner(System.in);
-		System.out.println("Usuário: ");
-		String user = scan.nextLine();
-		System.out.println("Senha: ");
-		String senha = scan.nextLine();
-		scan = new Scanner(System.in);
-		
-		Login login = new Login(user,senha);
-
-		return login;
-	}
-
 	public int menuPrincipal() {
-		System.out.println("-----_ MENU _-----");
+		System.out.println("\n-----_ MENU _-----");
 		System.out.println("1. Cadastrar novo item / Criar nova sala");
 		System.out.println("2. Entrar numa sala");
 		System.out.println("3. Consultar itens leiloados");
@@ -37,21 +16,38 @@ public class Cli {
 
 		return scan.nextInt();
 	}
-
+	
 	public int menuSala() {
-		System.out.println("-----_ MENU _-----");
+		System.out.println("\n-----_ SALA _-----");
 		System.out.println("1. Dar lance");
 		System.out.println("2. Ver lances");
 		System.out.println("0. Sair da sala");
 
 		return scan.nextInt();
 	}
-
+	
 	public int confirmacaoNovoParticipante(String user) {
 		System.out.println("Você permite que o usuário: "+user+", entre na sala?");
 		System.out.println("1. Sim");
 		System.out.println("0. Não");
 
 		return scan.nextInt();
+	}
+	
+	public boolean yesno(String str) {
+		String yesNo;
+		while(true) {
+			System.out.println(str);
+			yesNo = scan.nextLine();
+			scan = new Scanner(System.in);
+	
+			yesNo = yesNo.toLowerCase();
+			if (yesNo.equals("y")) 
+				return true;
+			else if (yesNo.equals("n"))
+				return false;
+			else
+				System.out.println("Digite uma opção válida! (y/n)");
+		}
 	}
 }

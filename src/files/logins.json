@@ -1,8 +1,10 @@
 {
-"logins": [
-        { "usuario":"RooD", "senha":"123"},
-      	{ "usuario":"Ana", "senha":"Pedro"},
-      	{ "usuario":"Maria", "senha":"m1m2"},
-      	{ "usuario":"DooR", "senha":"321"}
-    ]
+	"logins":
+	[
+		{"senha":"123","usuario":"RooD"},
+		{"senha":"Pedro","usuario":"Ana"},
+		{"senha":"m1m2","usuario":"Maria"},
+		{"senha":"321","usuario":"DooR"},
+		{"senha":"roro","usuario":"rodrigo"}
+	]
 }
