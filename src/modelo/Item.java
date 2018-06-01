@@ -1,4 +1,5 @@
 package modelo;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Item {
@@ -7,7 +8,8 @@ public class Item {
 	private String nome;
 	private double valor;
 	private Membro proprietario;
-	private HashMap<Double, Membro> lances; 
+	// Rever esse hashMap, agora existe a classe Lance
+	private HashMap<Double, Membro> lances;
 	
 	public Item() {
 		this.status = false;
@@ -22,6 +24,15 @@ public class Item {
 		this.proprietario = proprietario;
 	}
 
+	public static Item getItem(ArrayList<Sala> salas, String nameItem) {
+		for (Sala s : salas) {
+			if(s.getItem().getNome().equals(nameItem)) {
+				return s.getItem();
+			}
+		}
+		return null;
+	}
+	
 	public boolean isStatus() {
 		return status;
 	}

@@ -8,7 +8,7 @@ public class LeilaoCli {
 	
 	public int menuPrincipal() {
 		System.out.println("\n-----_ MENU _-----");
-		System.out.println("1. Cadastrar novo item / Criar nova sala");
+		System.out.println("1. Criar nova sala (Cadastrar novo item)");
 		System.out.println("2. Entrar numa sala");
 		System.out.println("3. Consultar itens leiloados");
 		System.out.println("4. Logout");
@@ -37,6 +37,7 @@ public class LeilaoCli {
 	public boolean yesno(String str) {
 		String yesNo;
 		while(true) {
+			scan = new Scanner(System.in);
 			System.out.println(str);
 			yesNo = scan.nextLine();
 			scan = new Scanner(System.in);
