@@ -39,7 +39,7 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
     public void exibiSalas() {
         System.out.print("[");
         for (Sala g : salas) {
-            System.out.print(" "+g.getNome());
+//            System.out.print(" "+g.getNome());
         }
         System.out.println(" ]");
     }
@@ -114,29 +114,29 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
         canal.close();
     }
 
-    public Address membroChat() {
-
-        Scanner teclado = new Scanner(System.in);
-        String nome = "";
-
-        while(!membros.containsKey(nome)){
-
-            System.out.println("Vizinhos:\n" +membros.keySet());
-
-            System.out.println("Escolha um membro do CHAT: ");
-            nome = teclado.next();
-            if(!membros.containsKey(nome)){
-                System.out.println("Esse membro nao esta no chat");
-            }
-        }
-
-        return membros.get(nome);
-    }
+//    public Address membroChat() {
+//
+//        Scanner teclado = new Scanner(System.in);
+//        String nome = "";
+//
+//        while(!membros.containsKey(nome)){
+//
+//            System.out.println("Vizinhos:\n" +membros.keySet());
+//
+//            System.out.println("Escolha um membro do CHAT: ");
+//            nome = teclado.next();
+//            if(!membros.containsKey(nome)){
+//                System.out.println("Esse membro nao esta no chat");
+//            }
+//        }
+//
+//        return membros.get(nome);
+//    }
 
     public String membrosSala() {
         Scanner teclado = new Scanner(System.in);
 
-        System.out.println("Vizinhos:\n" +membros.keySet());
+//        System.out.println("Vizinhos:\n" +membros.keySet());
 
         System.out.println("Escolha os membros do grupo: (separando por ' ' cada membro)");
 
@@ -200,46 +200,46 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
                     case 3:
 
                         //Recebe endereço do usuario escolhido
-                        Address aux = membroChat();
-                        String nomeEscolhido = "";
-
-                        if (membros.containsValue(aux)){
-
-                            for (String nome: membros.keySet()) {
-                                if (membros.get(nome) == aux){
-                                    nomeEscolhido = nome;
-                                }
-                            }
-                        }
-
+//                        Address aux = membroChat();
+//                        String nomeEscolhido = "";
+//
+//                        if (membros.containsValue(aux)){
+//
+//                            for (String nome: membros.keySet()) {
+//                                if (membros.get(nome) == aux){
+//                                    nomeEscolhido = nome;
+//                                }
+//                            }
+//                        }
+//
                         do {
-
-                            System.out.print(">");
-                            System.out.flush();
-
-                            linhaLidaDoUsuario = teclado.nextLine();
-
-                            if (linhaLidaDoUsuario.contains("NOVO")) {
-
-                                aux = membroChat();
-                                if (membros.containsValue(aux)){
-                                    for (String nome: membros.keySet()) {
-                                        if (membros.get(nome) == aux){
-                                            nomeEscolhido = nome;
-                                        }
-                                    }
-                                }
-
-                            }else if (!linhaLidaDoUsuario.contains(MENU) && !linhaLidaDoUsuario.contains(GRUPO) && !linhaLidaDoUsuario.contains(SAIR)) {
-
-                                if (membros.containsKey(nomeEscolhido)){
-
-                                    enviaUnicast(aux, linhaLidaDoUsuario, nomeEscolhido);
-                                }else{
-                                    System.out.println("membro "+ nomeEscolhido +" offline");
-                                }
-
-                            }
+//
+//                            System.out.print(">");
+//                            System.out.flush();
+//
+//                            linhaLidaDoUsuario = teclado.nextLine();
+//
+//                            if (linhaLidaDoUsuario.contains("NOVO")) {
+//
+//                                aux = membroChat();
+//                                if (membros.containsValue(aux)){
+//                                    for (String nome: membros.keySet()) {
+//                                        if (membros.get(nome) == aux){
+//                                            nomeEscolhido = nome;
+//                                        }
+//                                    }
+//                                }
+//
+//                            }else if (!linhaLidaDoUsuario.contains(MENU) && !linhaLidaDoUsuario.contains(GRUPO) && !linhaLidaDoUsuario.contains(SAIR)) {
+//
+//                                if (membros.containsKey(nomeEscolhido)){
+//
+//                                    enviaUnicast(aux, linhaLidaDoUsuario, nomeEscolhido);
+//                                }else{
+//                                    System.out.println("membro "+ nomeEscolhido +" offline");
+//                                }
+//
+//                            }
 
                         } while (!linhaLidaDoUsuario.contains(MENU) && !linhaLidaDoUsuario.contains(GRUPO) && !linhaLidaDoUsuario.contains(SAIR));
                         System.out.println("MENU - troca o tipo de envio de mensagens");
@@ -261,11 +261,11 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
     private Sala getSala(String nome) {
         Sala saida = new Sala();
 
-        for (Sala g: this.salas) {
-            if (g.nome.equals(nome)) {
-                saida = g;
-            }
-        }
+//        for (Sala g: this.salas) {
+//            if (g.nome.equals(nome)) {
+//                saida = g;
+//            }
+//        }
 
         return saida;
     }
@@ -303,22 +303,22 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
                     String args[] = grupo.split(" ");
 
 		                Sala novoSala = new Sala();
-
-		                novoSala.setNome(args[0]);
-
-		                HashMap<String, Address> membrosSala = new HashMap<>();
-
-		                for (int i=1; i < args.length; i++){
-		                    for (String s : membros.keySet()) {
-		                        if (args[i].equals(s)) {
-		                            membrosSala.put(args[i], membros.get(s));		                            
-		                        }
-		                    }
-		                }
-
-		                novoSala.setMembros(membrosSala);		            
-
-                    enviaAnycast(novoSala.getEnderecos(), "grupo() "+grupo);
+//
+//		                novoSala.setNome(args[0]);
+//
+//		                HashMap<String, Address> membrosSala = new HashMap<>();
+//
+//		                for (int i=1; i < args.length; i++){
+//		                    for (String s : membros.keySet()) {
+//		                        if (args[i].equals(s)) {
+//		                            membrosSala.put(args[i], membros.get(s));		                            
+//		                        }
+//		                    }
+//		                }
+//
+//		                novoSala.setMembros(membrosSala);		            
+//
+//                    enviaAnycast(novoSala.getEnderecos(), "grupo() "+grupo);
 
                     break;
                 case 2 :
@@ -328,33 +328,33 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
                     System.out.println(getSala(nome).getMembros().keySet());
                     System.out.print(">");
                     String msg = texto.nextLine();
-                    enviaAnycast(getSala(nome).getEnderecos(),"Sala "+nome+" | "+ nickname +" diz: "+msg);
+//                    enviaAnycast(getSala(nome).getEnderecos(),"Sala "+nome+" | "+ nickname +" diz: "+msg);
                     break;
                 case 3 :
                     System.out.println("Digite o nome do grupo");
                     grupo = texto.nextLine();
-                    System.out.println("Membros do chat: "+membros.keySet());
+//                    System.out.println("Membros do chat: "+membros.keySet());
                     System.out.println("Digite o nome do membro");
                     nome = texto.nextLine();
 
-                    endereco = this.membros.get(nome);
+//                    endereco = this.membros.get(nome);
 
-                    if (!getSala(grupo).getEnderecos().contains(endereco))
-                        getSala(grupo).getEnderecos().add(endereco);
-                    else System.out.println("Este membro já está no grupo!");
+//                    if (!getSala(grupo).getEnderecos().contains(endereco))
+//                        getSala(grupo).getEnderecos().add(endereco);
+//                    else System.out.println("Este membro já está no grupo!");
                     break;
                 case 4 :
-                    System.out.println("Digite o nome do grupo");
-                    grupo = texto.nextLine();
-                    System.out.println("Membros do chat: "+membros.keySet());
-                    System.out.println("Digite o nome do membro");
-                    nome = texto.nextLine();
-
-                    endereco = this.membros.get(nome);
-
-                    if (getSala(grupo).getEnderecos().contains(endereco))
-                        getSala(grupo).getEnderecos().remove(endereco);
-                    else System.out.println("Este membro não pertence ao grupo!");
+//                    System.out.println("Digite o nome do grupo");
+//                    grupo = texto.nextLine();
+//                    System.out.println("Membros do chat: "+membros.keySet());
+//                    System.out.println("Digite o nome do membro");
+//                    nome = texto.nextLine();
+//
+//                    endereco = this.membros.get(nome);
+//
+//                    if (getSala(grupo).getEnderecos().contains(endereco))
+//                        getSala(grupo).getEnderecos().remove(endereco);
+//                    else System.out.println("Este membro não pertence ao grupo!");
                     break;
                 case 0 :
                     break;
@@ -383,11 +383,11 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
         String nicknameVizinho;
         for(Address vizinho : respostasVizinhos.keySet()){
             nicknameVizinho = (respostasVizinhos.get(vizinho)).getValue();
-            if(!membros.containsKey(nicknameVizinho))
-                membros.put( nicknameVizinho , vizinho );
+//            if(!membros.containsKey(nicknameVizinho))
+//                membros.put( nicknameVizinho , vizinho );
         }
 
-        System.out.println("Membros Online:\n" +membros.keySet());
+//        System.out.println("Membros Online:\n" +membros.keySet());
     }
 
     private void enviaMulticast(String conteudo) throws Exception{
@@ -506,29 +506,29 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
             String args[] = comando.split(" ");
 
             for (Sala g : salas) {
-                if (args[1].equals(g.getNome())){
-                    temSala = true;
-                }
+//                if (args[1].equals(g.getNome())){
+//                    temSala = true;
+//                }
             }
 
             if (!temSala) {
 
                 Sala novoSala = new Sala();
 
-                novoSala.setNome(args[1]);
+//                novoSala.setNome(args[1]);
 
                 HashMap<String, Address> membrosSala = new HashMap<>();
 
                 for (int i=2; i < args.length; i++){
-                    for (String s : membros.keySet()) {
-                        if (args[i].equals(s)) {
-                            membrosSala.put(args[i], membros.get(s));                           
-                        }
-                    }
+//                    for (String s : membros.keySet()) {
+//                        if (args[i].equals(s)) {
+//                            membrosSala.put(args[i], membros.get(s));                           
+//                        }
+//                    }
                 }
 
-                novoSala.setMembros(membrosSala);
-                System.out.println("voce foi add ao grupo: "+novoSala.getNome());
+//                novoSala.setMembros(membrosSala);
+//                System.out.println("voce foi add ao grupo: "+novoSala.getNome());
                 this.salas.add(novoSala);
             }
 
@@ -542,7 +542,7 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
             // trata comandos do chat usar / ou # ou algo pra identificar comandos
             if(args[0].equals("membro()") && msg.getSrc() != canal.getAddress() ){
 
-                membros.put(args[1],msg.getSrc());
+//                membros.put(args[1],msg.getSrc());
                 return nickname; //resposta à requisição contida na mensagem
 
             }
@@ -570,12 +570,12 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
 
         cluster = new Vector<Address>(canal.getView().getMembers());
         Address endereco;
-        for (String nome : membros.keySet()) {
-            endereco = membros.get(nome);
-            if (!cluster.contains(endereco)){
-                membros.remove(nome);
-            }
-        }
+//        for (String nome : membros.keySet()) {
+//            endereco = membros.get(nome);
+//            if (!cluster.contains(endereco)){
+//                membros.remove(nome);
+//            }
+//        }
 
         //System.out.println("Membros Ativos: "+membros.keySet());
 
@@ -595,16 +595,16 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
         //Se tiver algum state transfer no XML, somente um novo membro irá chamar
 
         ObjectInputStream coordenador = new ObjectInputStream(input);
-        membros = (HashMap<String, Address>) coordenador.readObject();
+//        membros = (HashMap<String, Address>) coordenador.readObject();
 
         //salas
         //historico
     }
 
-    public static void main(String[] args) throws Exception{
-
-        ValChat chat = new ValChat();
-        chat.Start();
-    }
+//    public static void main(String[] args) throws Exception{
+//
+//        ValChat chat = new ValChat();
+//        chat.Start();
+//    }
 
 }

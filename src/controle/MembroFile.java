@@ -25,7 +25,7 @@ public class MembroFile {
 		// Cria o parse de tratamento
 		JSONParser parser = new JSONParser();
 
-		ArrayList<Membro> Membros = new ArrayList<Membro>();
+		ArrayList<Membro> membros = new ArrayList<Membro>();
 
 		try {
 			// Salva no objeto JSONObject o que o parse tratou do arquivo
@@ -42,7 +42,7 @@ public class MembroFile {
 //				String to Address, como proceder?
 				//Membros.add(new Membro(new Login(aux.get("usuario").toString(), aux.get("senha").toString()), aux.get("endereco").toString()));
 			}
-			return Membros;
+			return membros;
 
 		} catch (Exception e) {
 			System.out.println("Erro ao ler arquivo 'Membros.json'! ");
@@ -51,7 +51,7 @@ public class MembroFile {
 		return null;
 	}
 
-	public void writeMembros(ArrayList<Membro> Membros) {
+	public void writeMembros(ArrayList<Membro> membros) {
 		// instancia um novo JSONArray
 		JSONArray obJson = new JSONArray();
 		// instancia um novo JSONObject
@@ -60,7 +60,7 @@ public class MembroFile {
 
 		FileWriter writeFile = null;
 
-		for (Membro l : Membros) {
+		for (Membro l : membros) {
 			jsonObject = new JSONObject();
 			// Armazena dados em um Objeto JSON
 			jsonObject.put("usuario", l.getLogin().getUsuario());
@@ -83,7 +83,7 @@ public class MembroFile {
 		}
 	}
 
-	public void writeMembro(Membro Membro) {
+	public void writeMembro(Membro membro) {
 		// instancia um novo JSONArray
 		JSONArray obJson = new JSONArray();
 		// instancia um novo JSONObject
@@ -94,7 +94,7 @@ public class MembroFile {
 
 		// Adiciona o novo Membro no array
 		ArrayList<Membro> Membros = readMembros();
-		Membros.add(Membro);
+		Membros.add(membro);
 
 		for (Membro l : Membros) {
 			jsonObject = new JSONObject();
@@ -119,7 +119,7 @@ public class MembroFile {
 		}
 	}
 
-	public boolean existeMembro(Membro Membro) {
+	public boolean existeMembro(Membro membro) {
 		// instancia um novo JSONArray
 		JSONArray obJson = new JSONArray();
 		// instancia um novo JSONObject
@@ -140,7 +140,7 @@ public class MembroFile {
 				// System.out.println("Usuario: "+aux.get("usuario")+"- Membro:
 				// "+Membro.getUsuario()+"\nSenha: "+aux.get("senha"));
 				// garante Membro unico
-				if (aux.get("usuario").equals(Membro.getLogin().getUsuario())) {
+				if (aux.get("usuario").equals(membro.getLogin().getUsuario())) {
 					// System.out.println("Usuario: "+aux.get("usuario")+" == "+Membro.getUsuario());
 					return true;
 				}

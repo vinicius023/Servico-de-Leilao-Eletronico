@@ -35,7 +35,36 @@ public class Membro {
 	public void setEnderecoAtual(Address enderecoAtual) {
 		this.enderecoAtual = enderecoAtual;
 	}
-	
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((enderecoAtual == null) ? 0 : enderecoAtual.hashCode());
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Membro other = (Membro) obj;
+		if (enderecoAtual == null) {
+			if (other.enderecoAtual != null)
+				return false;
+		} else if (!enderecoAtual.equals(other.enderecoAtual))
+			return false;
+		if (login == null) {
+			if (other.login != null)
+				return false;
+		} else if (!login.equals(other.login))
+			return false;
+		return true;
+	}
 	
 }

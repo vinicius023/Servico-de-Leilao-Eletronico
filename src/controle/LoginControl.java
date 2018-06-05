@@ -23,6 +23,7 @@ public class LoginControl {
 		
 		return login;
 	}
+	
 	public boolean criarLogin() {
 	int i = 1;
 	 	while(true) {
