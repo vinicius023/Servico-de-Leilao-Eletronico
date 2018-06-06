@@ -71,7 +71,7 @@ public static final String PATH = "/home/rood/Git/Servico-de-Leilao-Eletronico/s
 			jsonObject.put("data", l.getData().toString());
 			jsonObject.put("valor", l.getValor());
 			jsonObject.put("item", l.getItem().getNome());
-			jsonObject.put("membro", l.getMembro().getLogin().getUsuario());
+			jsonObject.put("membro", l.getMembro().getUsuario());
 			//Armazena Objeto JSON em um Array JSON
 			obJson.add(jsonObject);
 		}
@@ -109,7 +109,7 @@ public static final String PATH = "/home/rood/Git/Servico-de-Leilao-Eletronico/s
 			jsonObject.put("data", l.getData().toString());
 			jsonObject.put("valor", l.getValor());
 			jsonObject.put("item", l.getItem().getNome());
-			jsonObject.put("membro", l.getMembro().getLogin().getUsuario());
+			jsonObject.put("membro", l.getMembro().getUsuario());
 			//Armazena Objeto JSON em um Array JSON
 			obJson.add(jsonObject);
 		}
@@ -151,7 +151,7 @@ public static final String PATH = "/home/rood/Git/Servico-de-Leilao-Eletronico/s
 				if(aux.get("data").equals(Lance.getData().toString()) &&
 						aux.get("valor").equals(Lance.getValor()) &&
 						aux.get("item").equals(Lance.getItem().getNome()) &&
-						aux.get("membro").equals(Lance.getMembro().getLogin().getUsuario())) {
+						aux.get("membro").equals(Lance.getMembro().getUsuario())) {
 					return true;
 				}
 					

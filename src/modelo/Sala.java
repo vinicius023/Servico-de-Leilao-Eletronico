@@ -1,10 +1,15 @@
 package modelo;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import org.jgroups.Address;
 
 public class Sala {
 
+	private String id;
 	private HashMap<String, Membro> membros;
+//	private static ArrayList<Membro> membros = new ArrayList<>();
 	private Item item;
 	private Membro leiloeiro;
 	private File log;
@@ -13,11 +18,11 @@ public class Sala {
 		
 	}
 	
-	public Sala(HashMap<String, Membro> membros, Item item, Membro leiloeiro, File log) {
+	public Sala(HashMap<String, Membro> membros, Item item, Membro leiloeiro) {
 		this.membros = membros;
 		this.item = item;
 		this.leiloeiro = leiloeiro;
-		this.log = log;
+		this.log = null;
 	}
 
 	public void AddMembro() {

@@ -5,12 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.jgroups.Address;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import modelo.Login;
 import modelo.Membro;
 
 public class MembroFile {
@@ -32,18 +30,16 @@ public class MembroFile {
 			jsonObject = (JSONObject) parser.parse(new FileReader(PATH));
 
 			// Coleta array com todos os Membros
-			obJson = (JSONArray) jsonObject.get("Membros");
+			obJson = (JSONArray) jsonObject.get("membros");
 
 			// Percorre todos os Membros
 			for (int i = 0; i < obJson.size(); i++) {
 				aux = (JSONObject) obJson.get(i);
 				// cria um novo objeto 'Membro' com o dado extraido
 				// adiciona o Membro ao array
-//				String to Address, como proceder?
-				//Membros.add(new Membro(new Login(aux.get("usuario").toString(), aux.get("senha").toString()), aux.get("endereco").toString()));
+				membros.add(new Membro(aux.get("usuario").toString(), aux.get("cluster").toString()));
 			}
 			return membros;
-
 		} catch (Exception e) {
 			System.out.println("Erro ao ler arquivo 'Membros.json'! ");
 			e.printStackTrace();
@@ -63,14 +59,15 @@ public class MembroFile {
 		for (Membro l : membros) {
 			jsonObject = new JSONObject();
 			// Armazena dados em um Objeto JSON
-			jsonObject.put("usuario", l.getLogin().getUsuario());
+			jsonObject.put("usuario", l.getUsuario());
 //			jsonObject.put("senha", l.getLogin().getSenha());
-			jsonObject.put("endereco", l.getEnderecoAtual().toString());
+			jsonObject.put("cluster", l.getCluster());
+//			jsonObject.put("endereco", l.getEndereco().toString());
 			// Armazena Objeto JSON em um Array JSON
 			obJson.add(jsonObject);
 		}
 		// Armazena Array JSON em um Objeto JSON
-		aux.put("Membros", obJson);
+		aux.put("membros", obJson);
 
 		try {
 			writeFile = new FileWriter(PATH);
@@ -93,21 +90,22 @@ public class MembroFile {
 		FileWriter writeFile = null;
 
 		// Adiciona o novo Membro no array
-		ArrayList<Membro> Membros = readMembros();
-		Membros.add(membro);
+		ArrayList<Membro> membros = readMembros();
+		membros.add(membro);
 
-		for (Membro l : Membros) {
+		for (Membro l : membros) {
 			jsonObject = new JSONObject();
 			// Armazena dados em um Objeto JSON
-			jsonObject.put("usuario", l.getLogin().getUsuario());
+			jsonObject.put("usuario", l.getUsuario());
 //			jsonObject.put("senha", l.getLogin().getSenha());
-			jsonObject.put("endereco", l.getEnderecoAtual());
+			jsonObject.put("cluster", l.getCluster());
+//			jsonObject.put("endereco", l.getEndereco().toString());
 			// Armazena Objeto JSON em um Array JSON
 			obJson.add(jsonObject);
 		}
 		// Armazena Array JSON em um Objeto JSON
-		aux.put("Membros", obJson);
-
+		aux.put("membros", obJson);
+		System.out.println("VAI escrever");
 		try {
 			writeFile = new FileWriter(PATH);
 			// Escreve no arquivo conteudo do Objeto JSON
@@ -132,19 +130,26 @@ public class MembroFile {
 			jsonObject = (JSONObject) parser.parse(new FileReader(PATH));
 
 			// Coleta array com todos os Membros
-			obJson = (JSONArray) jsonObject.get("Membros");
+			obJson = (JSONArray) jsonObject.get("membros");
 
 			// Percorre todos os Membros
-			for (int i = 0; i < obJson.size(); i++) {
-				aux = (JSONObject) obJson.get(i);
-				// System.out.println("Usuario: "+aux.get("usuario")+"- Membro:
-				// "+Membro.getUsuario()+"\nSenha: "+aux.get("senha"));
-				// garante Membro unico
-				if (aux.get("usuario").equals(membro.getLogin().getUsuario())) {
-					// System.out.println("Usuario: "+aux.get("usuario")+" == "+Membro.getUsuario());
-					return true;
+			if (obJson.size() == 0 ) {
+//				System.out.println("Nenhum membro cadastrado");
+				return false;
+			}
+			else {
+				System.out.println("ENtro = TAM "+obJson.size());
+				for (int i = 0; i < obJson.size(); i++) {
+					aux = (JSONObject) obJson.get(i);
+					 System.out.println("Usuario: "+aux.get("usuario")+"- Membro");
+					// "+Membro.getUsuario()+"\nSenha: "+aux.get("senha"));
+					// garante aquele Membro daquele canal
+					if ((aux.get("usuario").equals(membro.getUsuario())) && (aux.get("cluster").equals(membro.getCluster()))) {
+						// System.out.println("Usuario: "+aux.get("usuario")+" == "+Membro.getUsuario());
+						System.out.println("ACHOI");
+						return true;
+					}
 				}
-
 			}
 			return false;
 		} catch (Exception e) {

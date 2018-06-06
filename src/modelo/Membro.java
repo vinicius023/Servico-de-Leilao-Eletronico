@@ -6,42 +6,58 @@ import org.jgroups.Address;
 
 public class Membro {
 	
-	private Login login;
-	private Address enderecoAtual;
+	private String usuario;
+	private String cluster;
+	private Address endereco;
 	
-	public Membro(Login login, Address enderecoAtual) {
-		this.login = login;
-		this.enderecoAtual = enderecoAtual;
+	public Membro(String usuario, String cluster, Address endereco) {
+		this.usuario = usuario;
+		this.cluster = cluster;
+		this.endereco = endereco;
+	}
+	
+	public Membro(String usuario, String cluster) {
+		this.usuario = usuario;
+		this.cluster = cluster;
+		this.endereco = null;
 	}
 	
 	public static Membro getMembro(ArrayList<Membro> membros, String nameMembro) {
 		for (Membro m : membros) {
-			if(m.getLogin().getUsuario().equals(nameMembro)) {
+			if(m.getUsuario().equals(nameMembro)) {
 				return m;
 			}
 		}
 		return null;
 	}
 	
-	public Login getLogin() {
-		return login;
+	public String getUsuario() {
+		return usuario;
 	}
-	public void setLogin(Login login) {
-		this.login = login;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
-	public Address getEnderecoAtual() {
-		return enderecoAtual;
+	public Address getEndereco() {
+		return endereco;
 	}
-	public void setEnderecoAtual(Address enderecoAtual) {
-		this.enderecoAtual = enderecoAtual;
+	public void setEndereco(Address endereco) {
+		this.endereco = endereco;
+	}
+	public String getCluster() {
+		return cluster;
+	}
+
+	public void setCluster(String cluster) {
+		this.cluster = cluster;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((enderecoAtual == null) ? 0 : enderecoAtual.hashCode());
-		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		result = prime * result + ((cluster == null) ? 0 : cluster.hashCode());
+		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
+		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
 
@@ -54,17 +70,21 @@ public class Membro {
 		if (getClass() != obj.getClass())
 			return false;
 		Membro other = (Membro) obj;
-		if (enderecoAtual == null) {
-			if (other.enderecoAtual != null)
+		if (cluster == null) {
+			if (other.cluster != null)
 				return false;
-		} else if (!enderecoAtual.equals(other.enderecoAtual))
+		} else if (!cluster.equals(other.cluster))
 			return false;
-		if (login == null) {
-			if (other.login != null)
+		if (endereco == null) {
+			if (other.endereco != null)
 				return false;
-		} else if (!login.equals(other.login))
+		} else if (!endereco.equals(other.endereco))
+			return false;
+		if (usuario == null) {
+			if (other.usuario != null)
+				return false;
+		} else if (!usuario.equals(other.usuario))
 			return false;
 		return true;
 	}
-	
 }

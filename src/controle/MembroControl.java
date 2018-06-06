@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.jgroups.Address;
 
-import modelo.Login;
 import modelo.Membro;
 
 public class MembroControl {
@@ -15,14 +14,13 @@ public class MembroControl {
 		
 	}
 	
-	public Membro novoMembro(Login login, Address endereco) {
-		Membro membro = new Membro(login, endereco);
+	public Membro novoMembro(String usuario, String cluster, Address endereco) {
+		Membro membro = new Membro(usuario, cluster, endereco);
 		
 		if(!json.existeMembro(membro)) {
 			json.writeMembro(membro);
-			return membro;
 		}
-		return null;
+		return membro;
 	}
 	
 	public void removeMembro(Membro membro) {
