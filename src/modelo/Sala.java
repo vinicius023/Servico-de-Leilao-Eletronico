@@ -7,15 +7,17 @@ import org.jgroups.Address;
 
 public class Sala {
 
-	private String id;
+	private int id;
 	private HashMap<String, Membro> membros;
 //	private static ArrayList<Membro> membros = new ArrayList<>();
 	private Item item;
 	private Membro leiloeiro;
 	private File log;
 	
-	public Sala() {
-		
+	public Sala(int id, Membro membro, Item item) {
+		this.id = id;
+		this.leiloeiro = membro;
+		this.item = item;
 	}
 	
 	public Sala(HashMap<String, Membro> membros, Item item, Membro leiloeiro) {
@@ -27,6 +29,15 @@ public class Sala {
 
 	public void AddMembro() {
 		
+	}
+
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public HashMap<String, Membro> getMembros() {

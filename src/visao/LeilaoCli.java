@@ -17,15 +17,6 @@ public class LeilaoCli {
 		return scan.nextInt();
 	}
 	
-	public int menuSala() {
-		System.out.println("\n-----_ SALA _-----");
-		System.out.println("1. Dar lance");
-		System.out.println("2. Ver lances");
-		System.out.println("0. Sair da sala");
-
-		return scan.nextInt();
-	}
-	
 	public int confirmacaoNovoParticipante(String user) {
 		System.out.println("Você permite que o usuário: "+user+", entre na sala?");
 		System.out.println("1. Sim");

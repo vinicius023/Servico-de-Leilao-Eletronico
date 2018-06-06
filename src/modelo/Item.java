@@ -11,10 +11,11 @@ public class Item {
 	// Rever esse hashMap, agora existe a classe Lance
 	private HashMap<Double, Membro> lances;
 	
-	public Item() {
+	public Item(String nome, Membro membro) {
 		this.status = false;
-		this.nome = "";
+		this.nome = nome;
 		this.valor = 0;
+		this.proprietario = membro;
 	}
 	
 	public Item(boolean status, String nome, double valor, Membro proprietario) {
