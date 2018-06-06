@@ -13,7 +13,7 @@ import modelo.Membro;
 
 public class MembroFile {
 
-	public static final String PATH = "/home/rood/Git/Servico-de-Leilao-Eletronico/src/files/Membros.json";
+	public static final String PATH = "/home/vinicius/Documents/Servico-de-Leilao-Eletronico/src/files/Membros.json";
 
 	public ArrayList<Membro> readMembros() {
 		// instancia um novo JSONArray

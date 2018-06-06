@@ -3,9 +3,12 @@ import javax.xml.stream.events.StartDocument;
 import org.jgroups.Address;
 import org.jgroups.JChannel;
 import org.jgroups.MembershipListener;
+import org.jgroups.Message;
 import org.jgroups.MessageListener;
 import org.jgroups.Receiver;
+import org.jgroups.ReceiverAdapter;
 import org.jgroups.blocks.MessageDispatcher;
+import org.jgroups.blocks.RequestHandler;
 
 import controle.LeilaoControl;
 import controle.LoginControl;
@@ -14,7 +17,7 @@ import modelo.Leilao;
 import modelo.Login;
 import modelo.Membro;
 
-public class Principal {
+public class Principal extends ReceiverAdapter implements RequestHandler {
 
 //  user[0] = Tipo de usuario (0 = normal, 1 = cordenador, 2 = adiministrador)
 //  user[1] = Adress atual (ao logar enviar este endereco juntamente com seu login)
@@ -41,6 +44,12 @@ public class Principal {
 			e.printStackTrace();
 		}
 		
+		eventLoop();
+		canal.close();
+			
+	}
+	
+	public void eventLoop() {
 		LoginControl loginCtrl = new LoginControl();
 		Login login = loginCtrl.login();
 		
@@ -51,19 +60,7 @@ public class Principal {
 		
 		while(true) {
 			leilaoCtrl.menuPrincipal();
-	//		System.out.println("User: "+login.getUsuario());
-	//		System.out.println("Pass: "+login.getSenha());
-			
-	
-			System.out.println("Address: "+canal.getAddressAsString());
-			System.out.println("Cluster: "+canal.getClusterName());
-			
-			System.out.println("Membro\nUser: "+membro.getUsuario());
-			System.out.println("Address: "+membro.getEndereco());
-			canal.close();
 		}
-	//		leilaoCtrl.menuPrincipal();
-			
 	}
 
 	public static void main(String[] args) {
@@ -71,6 +68,12 @@ public class Principal {
 		Principal p = new Principal();
 		p.start();
 		
+	}
+
+	@Override
+	public Object handle(Message arg0) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

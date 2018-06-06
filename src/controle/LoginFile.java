@@ -13,7 +13,7 @@ import modelo.Login;
 
 public class LoginFile {
 
-	public static final String PATH = "/home/rood/Git/Servico-de-Leilao-Eletronico/src/files/logins.json";
+	public static final String PATH = "/home/vinicius/Documents/Servico-de-Leilao-Eletronico/src/files/logins.json";
 	
 	public ArrayList<Login> readLogins() {		
 		// instancia um novo JSONArray

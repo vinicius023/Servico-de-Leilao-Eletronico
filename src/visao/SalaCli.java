@@ -1,8 +1,11 @@
 package visao;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import modelo.Item;
+import modelo.Membro;
+import modelo.Sala;
 
 public class SalaCli {
 	
@@ -17,12 +20,20 @@ public class SalaCli {
 		return scan.nextInt();
 	}
 	
-	public Item cadastrarItem() {
+	public Item cadastrarItem(Membro membro) {
 		System.out.println("\\n-----_ Cadastrar Item _-----");
 		System.out.println("Nome do Item: ");
 		String nomeItem = scan.nextLine();
 		scan = new Scanner(System.in);
 		
-		return new Item(nomeItem);
+		return new Item(nomeItem, membro);
+	}
+
+	public void printSalas(ArrayList<Sala> minhasSalas) {
+		System.out.println("\\n-----_ Salas disponiveis _-----");
+		for (Sala s : minhasSalas) {
+			System.out.println("Sala "+s.getId());
+		}
+		
 	}
 }

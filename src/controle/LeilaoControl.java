@@ -1,6 +1,6 @@
 package controle;
 
-import org.jgroups.JChannel;
+import java.util.ArrayList;
 
 import modelo.Item;
 import modelo.Membro;
@@ -12,9 +12,11 @@ public class LeilaoControl {
 
 	private Membro membro;
 	private int numSalas = 0;
+	private ArrayList<Sala> minhasSalas = new ArrayList<>();
 	
 	LeilaoCli leilaoCli = new LeilaoCli();
 	SalaCli salaCli = new SalaCli();
+	SalaControl salaControl = new SalaControl();
 	
 	public LeilaoControl(Membro membro) {
 		this.membro = membro;
@@ -34,16 +36,18 @@ public class LeilaoControl {
 						// salvar estado atual do usuario aqui?!
 						// Nao apenas aqui, mas periodicamente durante a aplicação
 						System.exit(0);
+					break;
 				}
 				// Cadastrar novo item / Criar nova sala
 				case 1: {
-					Item novoItem = salaCli.cadastrarItem();
-					numSalas++;
-					Sala sala = new Sala(numSalas, membro, novoItem);
+					Sala sala = salaControl.novaSala(this.numSalas+1, this.membro);
+					minhasSalas.add(sala);
+					break;
 				}
 				// Entrar numa sala
 				case 2: {
-
+					salaControl.exibirSalas(this.minhasSalas);
+					salaControl.entrarSala(this.membro, this.numSalas, this.minhasSalas);
 				}
 				// Consultar itens leiloados
 				case 3: {

@@ -17,7 +17,7 @@ import modelo.Membro;
 
 public class LanceFile {
 
-public static final String PATH = "../src/files/Lances.json";
+public static final String PATH = "/home/vinicius/Documents/Servico-de-Leilao-Eletronico/src/files/Lances.json";
 	
 	public ArrayList<Lance> readLances() {		
 		// instancia um novo JSONArray
