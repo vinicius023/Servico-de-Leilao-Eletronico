@@ -50,7 +50,7 @@ public class Principal {
 		LeilaoControl leilaoCtrl = new LeilaoControl(membro);
 		
 		while(true) {
-			
+			leilaoCtrl.menuPrincipal();
 	//		System.out.println("User: "+login.getUsuario());
 	//		System.out.println("Pass: "+login.getSenha());
 			
