@@ -32,6 +32,8 @@ public class LoginControl {
 			if ((i == 1) || (i == 2)) {
 				if (i == 1)	return true;
 				else return false;
+			}else if(i == 0) {
+				System.exit(0);
 			}
 			System.out.println("Digite um valor válido! (1-2)");
 		}

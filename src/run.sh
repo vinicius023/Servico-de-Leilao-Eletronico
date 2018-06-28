@@ -1,8 +1,22 @@
 #!/bin/bash
 
-export CLASSPATH=$CLASSPATH:jgroups.jar
+find ./ -type d | while read DIR; do 
 
-javac ValChat.java
-javac Grupo.java
+    rm -r $DIR/*.class
 
-java ValChat
+done
+
+export CLASSPATH=$CLASSPATH:../lib/jgroups.jar:../lib/json-simple-1.1.1.jar:./controle:./visao:./controle
+
+find ./ -type d | while read DIR; do 
+
+    javac -cp $CLASSPATH $DIR/*.java
+
+done
+
+java -cp $CLASSPATH Principal
+
+
+
+#export CLASSPATH=$CLASSPATH:../lib/jgroups.jar
+#java -cp $CLASSPATH -jar leilao.jar 

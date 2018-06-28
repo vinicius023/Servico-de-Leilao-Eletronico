@@ -25,8 +25,8 @@ public class SalaCli {
 		System.out.println("Nome do Item: ");
 		String nomeItem = scan.nextLine();
 		scan = new Scanner(System.in);
-		
-		return new Item(nomeItem, membro);
+		Item item = new Item(nomeItem, membro);
+		return item;
 	}
 
 	public void printSalas(ArrayList<Sala> minhasSalas) {

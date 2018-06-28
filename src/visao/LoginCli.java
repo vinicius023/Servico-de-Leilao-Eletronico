@@ -10,6 +10,7 @@ public class LoginCli {
 	public int startLogin() {
 		System.out.println("1. Criar novo usuário");
 		System.out.println("2. Fazer login");
+		System.out.println("\n\n0. Sair");
 		return scan.nextInt();
 	}
 	

@@ -11,7 +11,7 @@ public class SalaControl {
 
 	private SalaCli salaCli;
 
-	public Sala novaSala(int numSala, Membro membro) {
+	public Sala novaSala(int numSala, Membro membro, Item item) {
 		// Cadastra novo item
 		Item novoItem = salaCli.cadastrarItem(membro);
 		// Cria nova sala
