@@ -8,6 +8,10 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="urn:org:jgroups"
         xsi:schemaLocation="urn:org:jgroups http://www.jgroups.org/schema/jgroups.xsd">
+    <MFC max_credits="2M"
+         min_threshold="0.4" />
+    <FRAG2 frag_size="60K" />
+    <COUNTER bypass_bundling="true" timeout="5000" /> <!-- Contador global -->
     <UDP
 
             ucast_recv_buf_size="212K"
@@ -16,7 +20,6 @@
             mcast_send_buf_size="212K"
 
     /> <!-- transporte de mensagens -->
-    <COUNTER bypass_bundling="true" timeout="5000" /> <!-- Contador global -->
     <PING/> <!-- Descoberta de vizinhos -->
 
     <FD_SOCK/> <!-- Detecta falha de processo -->

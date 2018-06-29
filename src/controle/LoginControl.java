@@ -10,7 +10,11 @@ public class LoginControl {
 	LoginCli cli = new LoginCli();
 	LoginFile json = new LoginFile();
 	
-	public Login login() {
+	public LoginControl() {
+		
+	}
+	
+ 	public Login login() {
 		Login login = new Login();
 		
 		if(criarLogin()) {
@@ -33,9 +37,10 @@ public class LoginControl {
 				if (i == 1)	return true;
 				else return false;
 			}else if(i == 0) {
+				System.out.println("Saindo...");
 				System.exit(0);
 			}
-			System.out.println("Digite um valor válido! (1-2)");
+			System.out.println("Digite um valor válido! (0-2)");
 		}
 	}
 	

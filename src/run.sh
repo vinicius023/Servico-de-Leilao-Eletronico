@@ -6,7 +6,7 @@ find ./ -type d | while read DIR; do
 
 done
 
-export CLASSPATH=$CLASSPATH:../lib/jgroups.jar:../lib/json-simple-1.1.1.jar:./controle:./visao:./controle
+export CLASSPATH=$CLASSPATH:../lib/jgroups.jar:../lib/json-simple-1.1.1.jar:./modelo:./visao:./controle
 
 find ./ -type d | while read DIR; do 
 

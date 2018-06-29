@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.jgroups.blocks.atomic.Counter;
 
-import modelo.Item;
 import modelo.Membro;
 import modelo.Sala;
 import visao.LeilaoCli;
@@ -25,11 +24,12 @@ public class LeilaoControl {
 		this.numSalas = counter_numSala;
 	}
 	
-	public void menuPrincipal() {
+	public boolean menuPrincipal() {
 		int op = 0;
 		
 		//opcao valida
-		while(true) {
+		boolean sair = false;
+		while(!sair) {
 			op = leilaoCli.menuPrincipal();
 
 			switch(op) {
@@ -38,13 +38,15 @@ public class LeilaoControl {
 					if(leilaoCli.yesno("Deseja realmente sair? (y/n)"))
 						// salvar estado atual do usuario aqui?!
 						// Nao apenas aqui, mas periodicamente durante a aplicação
-						System.exit(0);
+						sair = true;
 					break;
 				}
 				// Cadastrar novo item / Criar nova sala
 				case 1: {
-					Sala sala = salaControl.novaSala(this.numSalas.incrementAndGet(), this.membro);
+					System.out.println("Criando nova sala...");
+					Sala sala = salaControl.novaSala(this.numSalas.addAndGet(1), this.membro);
 					minhasSalas.add(sala);
+					System.out.println("Sala "+sala.getId()+" criada.");
 					break;
 				}
 				// Entrar numa sala
@@ -66,7 +68,8 @@ public class LeilaoControl {
 					System.out.println("Digite um valor válido! (0-4)");
 				}
 			}
-
-		}	
+		}
+		if (sair) return true;
+		return false;
 	}
 }

@@ -67,21 +67,6 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
         return opcao;
     }
 
-    public String membrosSala() {
-        Scanner teclado = new Scanner(System.in);
-
-//        System.out.println("Vizinhos:\n" +membros.keySet());
-
-        System.out.println("Escolha os membros do grupo: (separando por ' ' cada membro)");
-
-        String elementos = teclado.nextLine();
-
-        elementos += " "+nickname;
-
-        return elementos;
-
-    }
-
     private void eventLoop(){
 
         Scanner teclado = new Scanner(System.in);
@@ -236,7 +221,7 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
 
 //                    String args[] = grupo.split(" ");
 
-		                Sala novoSala = new Sala();
+		                //Sala novoSala = new Sala();
 //
 //		                novoSala.setNome(args[0]);
 //
@@ -259,7 +244,7 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
                     exibiSalas();
                     System.out.println("Digite o nome do grupo depois digite a mensagem");
                     nome = texto.nextLine();
-                    System.out.println(getSala(nome).getMembros().keySet());
+                    //System.out.println(getSala(nome).getMembros().keySet());
                     System.out.print(">");
                     String msg = texto.nextLine();
 //                    enviaAnycast(getSala(nome).getEnderecos(),"Sala "+nome+" | "+ nickname +" diz: "+msg);
@@ -447,7 +432,7 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
 
             if (!temSala) {
 
-                Sala novoSala = new Sala();
+                //Sala novoSala = new Sala();
 
 //                novoSala.setNome(args[1]);
 
@@ -463,7 +448,7 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
 
 //                novoSala.setMembros(membrosSala);
 //                System.out.println("voce foi add ao grupo: "+novoSala.getNome());
-                this.salas.add(novoSala);
+                //this.salas.add(novoSala);
             }
 
             return "grupo add";

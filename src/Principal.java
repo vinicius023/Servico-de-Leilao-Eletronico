@@ -1,12 +1,5 @@
-import java.util.ArrayList;
-
-import javax.xml.stream.events.StartDocument;
-
-import org.jgroups.Address;
 import org.jgroups.JChannel;
-import org.jgroups.MembershipListener;
 import org.jgroups.Message;
-import org.jgroups.MessageListener;
 import org.jgroups.Receiver;
 import org.jgroups.ReceiverAdapter;
 import org.jgroups.blocks.MessageDispatcher;
@@ -17,10 +10,8 @@ import org.jgroups.blocks.atomic.CounterService;
 import controle.LeilaoControl;
 import controle.LoginControl;
 import controle.MembroControl;
-import modelo.Leilao;
 import modelo.Login;
 import modelo.Membro;
-import modelo.Sala;
 
 public class Principal extends ReceiverAdapter implements RequestHandler {
 
@@ -72,7 +63,10 @@ public class Principal extends ReceiverAdapter implements RequestHandler {
 		LeilaoControl leilaoCtrl = new LeilaoControl(membro, counter_numSala);
 		
 		while(true) {
-			leilaoCtrl.menuPrincipal();
+			if(leilaoCtrl.menuPrincipal()) {
+				System.out.println("Saindo...");
+				System.exit(0);
+			}
 		}
 	}
 

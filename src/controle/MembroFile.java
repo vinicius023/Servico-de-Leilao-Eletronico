@@ -13,7 +13,7 @@ import modelo.Membro;
 
 public class MembroFile {
 
-	public static final String PATH = "/home/vinicius/Documents/Servico-de-Leilao-Eletronico/src/files/Membros.json";
+	public static final String PATH = System.getProperty("user.dir")+"/files/Membros.json";
 
 	public ArrayList<Membro> readMembros() {
 		// instancia um novo JSONArray
@@ -138,7 +138,7 @@ public class MembroFile {
 				return false;
 			}
 			else {
-				System.out.println("ENtro = TAM "+obJson.size());
+				System.out.println("Entro = TAM "+obJson.size());
 				for (int i = 0; i < obJson.size(); i++) {
 					aux = (JSONObject) obJson.get(i);
 					 System.out.println("Usuario: "+aux.get("usuario")+"- Membro");
@@ -146,7 +146,7 @@ public class MembroFile {
 					// garante aquele Membro daquele canal
 					if ((aux.get("usuario").equals(membro.getUsuario())) && (aux.get("cluster").equals(membro.getCluster()))) {
 						// System.out.println("Usuario: "+aux.get("usuario")+" == "+Membro.getUsuario());
-						System.out.println("ACHOI");
+						System.out.println("ACHOU");
 						return true;
 					}
 				}

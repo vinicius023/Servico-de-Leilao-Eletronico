@@ -23,6 +23,7 @@ public class SalaCli {
 	public Item cadastrarItem(Membro membro) {
 		System.out.println("\\n-----_ Cadastrar Item _-----");
 		System.out.println("Nome do Item: ");
+		scan = new Scanner(System.in);
 		String nomeItem = scan.nextLine();
 		scan = new Scanner(System.in);
 		Item item = new Item(nomeItem, membro);
