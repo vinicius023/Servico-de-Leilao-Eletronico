@@ -37,48 +37,19 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
 	}
 
     public void exibiSalas() {
-        System.out.print("[");
-        for (Sala g : salas) {
-//            System.out.print(" "+g.getNome());
+        System.out.print("Salas: [");
+        for (Sala s : salas) {
+        	System.out.print(" "+s.getId());
         }
         System.out.println(" ]");
     }
-
-    //Recebe o nick name
-    public void menuInicial() throws IOException {
-
-        File arquivo = new File( "nickName.txt" );
-
-        if(arquivo.exists()){
-
-            FileReader fr = new FileReader( arquivo );
-            BufferedReader br = new BufferedReader( fr );
-            //enquanto houver mais linhas
-
-            while( br.ready() ){
-                //lê a proxima linha
-                String linha = br.readLine();
-                nickname = linha;
-                //faz algo com a linha
-            }
-
-        }else{
-
-            Scanner entradaNick = new Scanner(System.in);
-
-            arquivo.createNewFile();
-
-            FileWriter fw = new FileWriter( arquivo );
-            BufferedWriter bw = new BufferedWriter( fw );
-
-            System.out.println("Digite o nickname: ");
-            nickname = entradaNick.nextLine();
-
-            bw.write(nickname);
-            bw.close();
-            fw.close();
+    
+    public void exibiMembros() {
+        System.out.print("Membros: [");
+        for (Membro m : membros) {
+        	System.out.print(" "+m.getUsuario());
         }
-
+        System.out.println(" ]");
     }
 
     public Integer menuTipoMensagem() {
@@ -95,43 +66,6 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
         opcao = entradaMenu.nextInt();
         return opcao;
     }
-
-    private void Start() throws Exception{
-
-        menuInicial(); // Pede nickname do usuario
-
-        canal = new JChannel("cast.xml");
-
-        despachante = new MessageDispatcher(canal, null, null, this);
-
-        despachante.setRequestHandler(this);
-        despachante.setMessageListener(this);
-        despachante.setMembershipListener(this);
-
-        canal.setReceiver(this);
-        canal.connect("ValChat");
-        eventLoop();
-        canal.close();
-    }
-
-//    public Address membroChat() {
-//
-//        Scanner teclado = new Scanner(System.in);
-//        String nome = "";
-//
-//        while(!membros.containsKey(nome)){
-//
-//            System.out.println("Vizinhos:\n" +membros.keySet());
-//
-//            System.out.println("Escolha um membro do CHAT: ");
-//            nome = teclado.next();
-//            if(!membros.containsKey(nome)){
-//                System.out.println("Esse membro nao esta no chat");
-//            }
-//        }
-//
-//        return membros.get(nome);
-//    }
 
     public String membrosSala() {
         Scanner teclado = new Scanner(System.in);
@@ -258,16 +192,16 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
         }//while
     }
 
-    private Sala getSala(String nome) {
-        Sala saida = new Sala();
+    private Sala getSala(int id) {
+        //Sala saida = new Sala();
 
-//        for (Sala g: this.salas) {
-//            if (g.nome.equals(nome)) {
-//                saida = g;
-//            }
-//        }
+        for (Sala s: this.salas) {
+            if (s.getId() == id) {
+                return s;
+            }
+        }
 
-        return saida;
+        return null;
     }
 
     private void menuSala() throws Exception {
@@ -298,9 +232,9 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
                     System.out.println("Digite o nome do grupo: ");
                     grupo = texto.nextLine();
 
-                    grupo += " "+membrosSala();
+//                    grupo += " "+membrosSala();
 
-                    String args[] = grupo.split(" ");
+//                    String args[] = grupo.split(" ");
 
 		                Sala novoSala = new Sala();
 //

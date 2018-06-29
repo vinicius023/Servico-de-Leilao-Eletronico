@@ -2,6 +2,8 @@ package controle;
 
 import java.util.ArrayList;
 
+import org.jgroups.blocks.atomic.Counter;
+
 import modelo.Item;
 import modelo.Membro;
 import modelo.Sala;
@@ -11,15 +13,16 @@ import visao.SalaCli;
 public class LeilaoControl {
 
 	private Membro membro;
-	private int numSalas = 0;
+	private Counter numSalas;
 	private ArrayList<Sala> minhasSalas = new ArrayList<>();
 	
 	LeilaoCli leilaoCli = new LeilaoCli();
 	SalaCli salaCli = new SalaCli();
 	SalaControl salaControl = new SalaControl();
 	
-	public LeilaoControl(Membro membro) {
+	public LeilaoControl(Membro membro, Counter counter_numSala) {
 		this.membro = membro;
+		this.numSalas = counter_numSala;
 	}
 	
 	public void menuPrincipal() {
@@ -40,14 +43,16 @@ public class LeilaoControl {
 				}
 				// Cadastrar novo item / Criar nova sala
 				case 1: {
-					Sala sala = salaControl.novaSala(this.numSalas+1, this.membro);
+					Sala sala = salaControl.novaSala(this.numSalas.incrementAndGet(), this.membro);
 					minhasSalas.add(sala);
 					break;
 				}
 				// Entrar numa sala
 				case 2: {
+					// exibe as salas disponiveis
 					salaControl.exibirSalas(this.minhasSalas);
-					salaControl.entrarSala(this.membro, this.numSalas, this.minhasSalas);
+					// escolhe a sala e adiciona o membro nas 'minhasSalas'
+					salaControl.entrarSala(this.membro, this.minhasSalas);
 				}
 				// Consultar itens leiloados
 				case 3: {

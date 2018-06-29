@@ -28,6 +28,14 @@ public class SalaCli {
 		Item item = new Item(nomeItem, membro);
 		return item;
 	}
+	
+	public Integer escolherSala(ArrayList<Sala> minhasSalas) {
+		System.out.println("\\n-----_ Escolher Sala _-----");
+		System.out.println("ID da sala: ");
+		Integer numItem = scan.nextInt();
+		scan = new Scanner(System.in);
+		return numItem;
+	}
 
 	public void printSalas(ArrayList<Sala> minhasSalas) {
 		System.out.println("\\n-----_ Salas disponiveis _-----");

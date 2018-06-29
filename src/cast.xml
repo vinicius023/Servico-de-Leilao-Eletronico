@@ -16,6 +16,7 @@
             mcast_send_buf_size="212K"
 
     /> <!-- transporte de mensagens -->
+    <COUNTER bypass_bundling="true" timeout="5000" /> <!-- Contador global -->
     <PING/> <!-- Descoberta de vizinhos -->
 
     <FD_SOCK/> <!-- Detecta falha de processo -->

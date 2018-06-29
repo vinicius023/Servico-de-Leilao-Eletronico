@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javax.xml.stream.events.StartDocument;
 
 import org.jgroups.Address;
@@ -9,6 +11,8 @@ import org.jgroups.Receiver;
 import org.jgroups.ReceiverAdapter;
 import org.jgroups.blocks.MessageDispatcher;
 import org.jgroups.blocks.RequestHandler;
+import org.jgroups.blocks.atomic.Counter;
+import org.jgroups.blocks.atomic.CounterService;
 
 import controle.LeilaoControl;
 import controle.LoginControl;
@@ -16,6 +20,7 @@ import controle.MembroControl;
 import modelo.Leilao;
 import modelo.Login;
 import modelo.Membro;
+import modelo.Sala;
 
 public class Principal extends ReceiverAdapter implements RequestHandler {
 
@@ -25,20 +30,28 @@ public class Principal extends ReceiverAdapter implements RequestHandler {
 	
 	JChannel canal;
 	MessageDispatcher despachante;
-	
-	public void start() {
+	CounterService counter_service;
+	Counter counter_numSala;
+    
+	public void start() throws Exception{
 	
 		try {
+			// cria canal
 			canal = new JChannel("cast.xml");
-			canal.connect("roro");
 			
-//			despachante = new MessageDispatcher(canal, null, null, despachante);
-//
-//	        despachante.setRequestHandler(despachante);
-//	        despachante.setMessageListener((MessageListener) this);
-//	        despachante.setMembershipListener((MembershipListener) this);
-//
-//	        canal.setReceiver((Receiver) this);
+			// cria contador global
+			this.counter_service = new CounterService(canal);
+			
+			despachante = new MessageDispatcher(canal, null, null, this);
+
+			despachante.setRequestHandler(this);
+	        despachante.setMessageListener(this);
+	        despachante.setMembershipListener(this);
+	        
+	        canal.setReceiver((Receiver) this);
+	        canal.connect("RooD");
+	        this.counter_numSala = counter_service.getOrCreateCounter("numSala", 1);
+	        
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,7 +69,7 @@ public class Principal extends ReceiverAdapter implements RequestHandler {
 		MembroControl membroCtrl = new MembroControl();
 		Membro membro = membroCtrl.novoMembro(login.getUsuario(), canal.getClusterName(), canal.getAddress());
 		
-		LeilaoControl leilaoCtrl = new LeilaoControl(membro);
+		LeilaoControl leilaoCtrl = new LeilaoControl(membro, counter_numSala);
 		
 		while(true) {
 			leilaoCtrl.menuPrincipal();
@@ -66,10 +79,15 @@ public class Principal extends ReceiverAdapter implements RequestHandler {
 	public static void main(String[] args) {
 		
 		Principal p = new Principal();
-		p.start();
+		try {
+			p.start();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
-
+	
 	@Override
 	public Object handle(Message arg0) throws Exception {
 		// TODO Auto-generated method stub

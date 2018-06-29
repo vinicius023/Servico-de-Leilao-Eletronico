@@ -1,50 +1,47 @@
 package modelo;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import org.jgroups.Address;
 
 public class Sala {
 
-	private int id;
-	private HashMap<String, Membro> membros;
+	private long id;
+	private ArrayList<Membro> membros;
 //	private static ArrayList<Membro> membros = new ArrayList<>();
 	private Item item;
 	private Membro leiloeiro;
 	private File log;
 	
-	public Sala(int id, Membro membro, Item item) {
+	public Sala(long id, Membro membro, Item item) {
 		this.id = id;
 		this.leiloeiro = membro;
 		this.item = item;
 	}
 	
-	public Sala(HashMap<String, Membro> membros, Item item, Membro leiloeiro) {
+	public Sala(ArrayList<Membro> membros, Item item, Membro leiloeiro) {
 		this.membros = membros;
 		this.item = item;
 		this.leiloeiro = leiloeiro;
 		this.log = null;
 	}
 
-	public void AddMembro() {
-		
+	public void AddMembro(Membro membro) {
+		this.membros.add(membro);
 	}
 
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public HashMap<String, Membro> getMembros() {
+	public ArrayList<Membro> getMembros() {
 		return membros;
 	}
 
-	public void setMembros(HashMap<String, Membro> membros) {
+	public void setMembros(ArrayList<Membro> membros) {
 		this.membros = membros;
 	}
 
