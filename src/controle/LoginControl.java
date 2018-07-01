@@ -22,7 +22,6 @@ public class LoginControl {
 			System.out.println("Cadastro e Login realizado com sucesso!");
 		} else {
 			login = realizarLogin();
-			System.out.println("Login realizado com sucesso!");
 		}
 		
 		return login;
@@ -64,11 +63,11 @@ public class LoginControl {
 	}
 	
 	public Login realizarLogin() {
+		boolean flag = false;
 		Login login = new Login();
 		// logins = lista de usuarios do arquivo
 		ArrayList<Login> logins = json.readLogins();
 		
-		while(true) {
 			System.out.println("\n---_ Realizar Login _---");
 			if (logins.isEmpty()) {
 				System.out.println("Não existe usuário cadastrado. Realize o cadastro de um novo usuário.");
@@ -77,12 +76,20 @@ public class LoginControl {
 				login = cli.login();
 			
 			for (Login l : logins) {
-				if((login.getUsuario().equals(l.getUsuario())) && (login.getSenha().equals(l.getSenha())))	
-					return login;
+				if((login.getUsuario().equals(l.getUsuario())) && (login.getSenha().equals(l.getSenha()))) {
+					flag = true;
+					break;
+				}
 			}
-			// login incorreto
-			System.out.println("Nome de usuário e/ou senha, incorreto(s)! Digite novamente.");
-		}
+			if (flag) {
+				return login;
+			} else {
+				// login incorreto
+				System.out.println("Nome de usuário e/ou senha, incorreto(s)! Digite novamente.");
+				login = login();
+			}
+			return login;
+			
 	}
 
 }

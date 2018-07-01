@@ -246,7 +246,7 @@ public class Leilao extends ReceiverAdapter implements RequestHandler {
                     nome = texto.nextLine();
                     //System.out.println(getSala(nome).getMembros().keySet());
                     System.out.print(">");
-                    String msg = texto.nextLine();
+//                    String msg = texto.nextLine();
 //                    enviaAnycast(getSala(nome).getEnderecos(),"Sala "+nome+" | "+ nickname +" diz: "+msg);
                     break;
                 case 3 :

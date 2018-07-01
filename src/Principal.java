@@ -56,6 +56,8 @@ public class Principal extends ReceiverAdapter implements RequestHandler {
 	public void eventLoop() {
 		LoginControl loginCtrl = new LoginControl();
 		Login login = loginCtrl.login();
+
+		System.out.println("Login realizado com sucesso!");
 		
 		MembroControl membroCtrl = new MembroControl();
 		Membro membro = membroCtrl.novoMembro(login.getUsuario(), canal.getClusterName(), canal.getAddress());
