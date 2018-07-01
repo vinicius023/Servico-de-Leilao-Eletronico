@@ -14,8 +14,8 @@ public class MembroControl {
 		
 	}
 	
-	public Membro novoMembro(String usuario, String cluster, Address endereco) {
-		Membro membro = new Membro(usuario, cluster, endereco);
+	public Membro novoMembro(String usuario, Address endereco) {
+		Membro membro = new Membro(usuario, endereco);
 		
 		// garante membro unico
 		if(!json.existeMembro(membro)) {

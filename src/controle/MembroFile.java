@@ -37,7 +37,7 @@ public class MembroFile {
 				aux = (JSONObject) obJson.get(i);
 				// cria um novo objeto 'Membro' com o dado extraido
 				// adiciona o Membro ao array
-				membros.add(new Membro(aux.get("usuario").toString(), aux.get("cluster").toString()));
+				membros.add(new Membro(aux.get("usuario").toString()));
 			}
 			return membros;
 		} catch (Exception e) {
@@ -61,7 +61,6 @@ public class MembroFile {
 			// Armazena dados em um Objeto JSON
 			jsonObject.put("usuario", l.getUsuario());
 //			jsonObject.put("senha", l.getLogin().getSenha());
-			jsonObject.put("cluster", l.getCluster());
 //			jsonObject.put("endereco", l.getEndereco().toString());
 			// Armazena Objeto JSON em um Array JSON
 			obJson.add(jsonObject);
@@ -98,7 +97,6 @@ public class MembroFile {
 			// Armazena dados em um Objeto JSON
 			jsonObject.put("usuario", l.getUsuario());
 //			jsonObject.put("senha", l.getLogin().getSenha());
-			jsonObject.put("cluster", l.getCluster());
 //			jsonObject.put("endereco", l.getEndereco().toString());
 			// Armazena Objeto JSON em um Array JSON
 			obJson.add(jsonObject);
@@ -144,7 +142,7 @@ public class MembroFile {
 					 System.out.println("Usuario: "+aux.get("usuario")+"- Membro");
 					// "+Membro.getUsuario()+"\nSenha: "+aux.get("senha"));
 					// garante aquele Membro daquele canal
-					if ((aux.get("usuario").equals(membro.getUsuario())) && (aux.get("cluster").equals(membro.getCluster()))) {
+					if ((aux.get("usuario").equals(membro.getUsuario()))) {
 						// System.out.println("Usuario: "+aux.get("usuario")+" == "+Membro.getUsuario());
 						System.out.println("ACHOU");
 						return true;
