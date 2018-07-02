@@ -7,7 +7,6 @@ public class Item {
 	private String nome;
 	private double maiorValor;
 	private Membro proprietario;
-	// Rever esse hashMap, agora existe a classe Lance
 	private ArrayList<Lance> lances = new ArrayList<Lance>();
 	
 	public Item(String nome, Membro membro) {

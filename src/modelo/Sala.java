@@ -2,6 +2,8 @@ package modelo;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.jgroups.Address;
+
 public class Sala {
 
 	private long id;
@@ -31,6 +33,13 @@ public class Sala {
 		this.membros.add(membro);
 	}
 
+	public ArrayList<Address> getListAdress() {
+		ArrayList<Address> enderecos = new ArrayList<Address>();
+		for (Membro m : this.membros) {
+			enderecos.add(m.getEndereco());
+		}
+		return enderecos;
+	}
 	
 	public long getId() {
 		return id;

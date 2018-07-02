@@ -50,6 +50,7 @@ public class SalaCli {
 
 	public Double lance() {
 		System.out.println("Valor do lance: ");
+		scan = new Scanner(System.in);
 		Double lance = scan.nextDouble();
 		scan = new Scanner(System.in);
 		return lance;

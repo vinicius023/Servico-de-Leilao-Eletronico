@@ -2,7 +2,13 @@ package controle;
 
 import java.util.ArrayList;
 
+import org.jgroups.Address;
+import org.jgroups.Message;
+import org.jgroups.blocks.MessageDispatcher;
+import org.jgroups.blocks.RequestOptions;
+import org.jgroups.blocks.ResponseMode;
 import org.jgroups.blocks.atomic.Counter;
+import org.jgroups.util.RspList;
 
 import modelo.Membro;
 import modelo.Sala;
@@ -13,6 +19,7 @@ public class LeilaoControl {
 
 	private Membro membro;
 	private Counter numSalas;
+	private MessageDispatcher despachante;
 	private Sala salaAtual;
 	private ArrayList<Sala> minhasSalas = new ArrayList<>();
 	
@@ -20,15 +27,16 @@ public class LeilaoControl {
 	SalaCli salaCli = new SalaCli();
 	SalaControl salaControl = new SalaControl();
 	
-	public LeilaoControl(Membro membro, Counter counter_numSala) {
+	public LeilaoControl(MessageDispatcher despachante, Membro membro, Counter counter_numSala) {
 		this.membro = membro;
 		this.numSalas = counter_numSala;
+		this.despachante = despachante;
 	}
 	
 	public boolean menuPrincipal() {
 		int op = 0;
 		
-		//opcao valida
+		// Opcao valida
 		boolean sair = false;
 		while(!sair) {
 			op = leilaoCli.menuPrincipal();
@@ -84,4 +92,73 @@ public class LeilaoControl {
 		if (sair) return true;
 		return false;
 	}
+	
+	private void enviaSalasMulticast() throws Exception{
+
+        //System.out.println("cheguei enviaMulticast");
+
+        Address cluster = null; //endereço null significa TODOS os membros do cluster
+        Message mensagem = new Message(cluster, null, this.minhasSalas);
+
+        RequestOptions opcoes = new RequestOptions();
+        opcoes.setFlags(Message.DONT_BUNDLE); // envia imediatamente, não agrupa várias mensagens numa só
+        opcoes.setMode(ResponseMode.GET_ALL); // espera receber a resposta de TODOS membros (ALL, MAJORITY, FIRST, NONE)
+
+        opcoes.setAnycasting(false);
+
+        RspList<String> respList = despachante.castMessage(null, mensagem, opcoes); //MULTICAST
+        //System.out.println("==> Respostas do cluster ao MULTICAST:\n" +respList+"\n");
+    }
+	
+//	private void enviaMulticast() throws Exception{
+//
+//        //System.out.println("cheguei enviaMulticast");
+//
+//        Address cluster = null; //endereço null significa TODOS os membros do cluster
+//        Message mensagem = new Message(cluster, null, nickname + " diz: " + conteudo);
+//
+//        RequestOptions opcoes = new RequestOptions();
+//        opcoes.setFlags(Message.DONT_BUNDLE); // envia imediatamente, não agrupa várias mensagens numa só
+//        opcoes.setMode(ResponseMode.GET_ALL); // espera receber a resposta de TODOS membros (ALL, MAJORITY, FIRST, NONE)
+//
+//        opcoes.setAnycasting(false);
+//
+//        RspList<String> respList = despachante.castMessage(null, mensagem, opcoes); //MULTICAST
+//        //System.out.println("==> Respostas do cluster ao MULTICAST:\n" +respList+"\n");
+//    }
+//
+//    private void enviaAnycast(Collection<Address> grupo, String conteudo) throws Exception{
+//
+//        //System.out.println("cheguei enviaAnycast");
+//
+//        Message mensagem=new Message(null,conteudo); //apesar do endereço ser null, se as opcoes contiverem anycasting==true enviará somente aos destinos listados
+//
+//        RequestOptions opcoes = new RequestOptions();
+//        opcoes.setFlags(Message.DONT_BUNDLE); // envia imediatamente, não agrupa várias mensagens numa só
+//        opcoes.setMode(ResponseMode.GET_MAJORITY); // espera receber a resposta da maioria do grupo (ALL, MAJORITY, FIRST, NONE)
+//
+//        opcoes.setAnycasting(true);
+//
+//        RspList<String> respList = despachante.castMessage(grupo, mensagem, opcoes); //ANYCAST
+//        //System.out.println("==> Respostas do grupo ao ANYCAST:\n" +respList+"\n");
+//
+//    }
+//
+//    private void enviaUnicast(Address destino, String conteudo, String nick) throws Exception{
+//
+//        Address endereco = destino; //endereço null significa TODOS os membros do cluster
+//
+//        Message mensagem = new Message(endereco, null, "# " + nickname + " diz: " + conteudo);
+//
+//        RequestOptions opcoes = new RequestOptions();
+//
+//        opcoes.setFlags(Message.DONT_BUNDLE); // envia imediatamente, não agrupa várias mensagens numa só
+//        opcoes.setMode(ResponseMode.GET_FIRST); // não espera receber a resposta do destino (ALL, MAJORITY, FIRST, NONE)
+//
+//        String resp = despachante.sendMessage(mensagem, opcoes); //UNICAST
+//
+//        //System.out.println(resp);
+//        setHistorico(nick, mensagem.getObject().toString(), 1);
+//        //System.out.println("==> Respostas do membro ao UNICAST:\n" +resp+"\n");
+//    }
 }

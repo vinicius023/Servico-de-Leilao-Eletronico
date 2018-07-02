@@ -73,7 +73,7 @@ public class Principal extends ReceiverAdapter implements RequestHandler {
 		System.out.println("Login: "+login.getUsuario()+"\nAdress: "+canal.getAddress().toString());
 		Membro membro = membroCtrl.novoMembro(login.getUsuario(), canal.getAddress());
 		
-		LeilaoControl leilaoCtrl = new LeilaoControl(membro, counter_numSala);
+		LeilaoControl leilaoCtrl = new LeilaoControl(despachante, membro, counter_numSala);
 		
 		while(true) {
 			if(leilaoCtrl.menuPrincipal()) {
@@ -83,6 +83,10 @@ public class Principal extends ReceiverAdapter implements RequestHandler {
 		}
 	}
 
+	public void getEstadoLeilao() {
+		
+	}
+	
 	public static void main(String[] args) {
 		
 		Principal p = new Principal();
