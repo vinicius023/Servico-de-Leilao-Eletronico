@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import modelo.Item;
+import modelo.Lance;
 import modelo.Membro;
 import modelo.Sala;
 
@@ -27,6 +28,7 @@ public class SalaCli {
 		String nomeItem = scan.nextLine();
 		scan = new Scanner(System.in);
 		Item item = new Item(nomeItem, membro);
+		System.out.println("Item criado!");
 		return item;
 	}
 	
@@ -44,5 +46,21 @@ public class SalaCli {
 			System.out.println("Sala "+s.getId());
 		}
 		
+	}
+
+	public Double lance() {
+		System.out.println("Valor do lance: ");
+		Double lance = scan.nextDouble();
+		scan = new Scanner(System.in);
+		return lance;
+	}
+	
+	public void printLances(ArrayList<Lance> lances) {
+		System.out.println("\\n-----_ Lances _-----");
+		if (lances.isEmpty())
+			System.out.println("Lista de lances vazia!");
+		for (Lance l : lances) {
+			System.out.println("Membro: "+l.getMembro().getUsuario()+"\tLance: "+l.getLance());
+		}
 	}
 }

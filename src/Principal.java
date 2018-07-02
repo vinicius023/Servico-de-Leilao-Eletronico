@@ -48,9 +48,9 @@ public class Principal extends ReceiverAdapter implements RequestHandler {
 	        despachante.setMessageListener(this);
 	        despachante.setMembershipListener(this);
 	        
-	        canal.setReceiver((Receiver) this);
-	        canal.connect("RooD");
-	        this.counter_numSala = counter_service.getOrCreateCounter("numSala", 1);
+	        canal.setReceiver(this);
+	        canal.connect("roro");
+	        this.counter_numSala = counter_service.getOrCreateCounter("numSala", 0);
 	        
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -64,11 +64,13 @@ public class Principal extends ReceiverAdapter implements RequestHandler {
 	
 	public void eventLoop() {
 		LoginControl loginCtrl = new LoginControl();
-		Login login = loginCtrl.login();
+		Login login = new Login(); 
+		login = loginCtrl.login();
 
 		System.out.println("Login realizado com sucesso!");
 		
 		MembroControl membroCtrl = new MembroControl();
+		System.out.println("Login: "+login.getUsuario()+"\nAdress: "+canal.getAddress().toString());
 		Membro membro = membroCtrl.novoMembro(login.getUsuario(), canal.getAddress());
 		
 		LeilaoControl leilaoCtrl = new LeilaoControl(membro, counter_numSala);

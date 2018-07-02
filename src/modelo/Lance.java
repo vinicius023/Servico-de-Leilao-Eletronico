@@ -1,43 +1,14 @@
 package modelo;
 
-import java.util.Date;
-
 public class Lance {
 
-	private Date data;
-	private double valor;
-	private Item item;
 	private Membro membro;
+	private Double lance;
 	
-	public Lance(Date data, double valor, Item item, Membro membro) {
-		this.data = data;
-		this.valor = valor;
-		this.item = item;
+	public Lance(Membro membro, Double lance) {
+		super();
 		this.membro = membro;
-	}
-
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
-
-	public double getValor() {
-		return valor;
-	}
-
-	public void setValor(double valor) {
-		this.valor = valor;
-	}
-
-	public Item getItem() {
-		return item;
-	}
-
-	public void setItem(Item item) {
-		this.item = item;
+		this.lance = lance;
 	}
 
 	public Membro getMembro() {
@@ -46,5 +17,44 @@ public class Lance {
 
 	public void setMembro(Membro membro) {
 		this.membro = membro;
+	}
+
+	public Double getLance() {
+		return lance;
+	}
+
+	public void setLance(Double lance) {
+		this.lance = lance;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((lance == null) ? 0 : lance.hashCode());
+		result = prime * result + ((membro == null) ? 0 : membro.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Lance other = (Lance) obj;
+		if (lance == null) {
+			if (other.lance != null)
+				return false;
+		} else if (!lance.equals(other.lance))
+			return false;
+		if (membro == null) {
+			if (other.membro != null)
+				return false;
+		} else if (!membro.equals(other.membro))
+			return false;
+		return true;
 	}
 }

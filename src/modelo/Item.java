@@ -1,27 +1,26 @@
 package modelo;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Item {
 	
 	private boolean status;
 	private String nome;
-	private double valor;
+	private double maiorValor;
 	private Membro proprietario;
 	// Rever esse hashMap, agora existe a classe Lance
-	private HashMap<Double, Membro> lances;
+	private ArrayList<Lance> lances = new ArrayList<Lance>();
 	
 	public Item(String nome, Membro membro) {
 		this.status = false;
 		this.nome = nome;
-		this.valor = 0;
+		this.maiorValor = 0;
 		this.proprietario = membro;
 	}
 	
 	public Item(boolean status, String nome, double valor, Membro proprietario) {
 		this.status = status;
 		this.nome = nome;
-		this.valor = valor;
+		this.maiorValor = valor;
 		this.proprietario = proprietario;
 	}
 
@@ -50,12 +49,12 @@ public class Item {
 		this.nome = nome;
 	}
 
-	public double getValor() {
-		return valor;
+	public double getMaiorValor() {
+		return maiorValor;
 	}
 
-	public void setValor(double valor) {
-		this.valor = valor;
+	public void setMaiorValor(double maiorValor) {
+		this.maiorValor = maiorValor;
 	}
 
 	public Membro getProprietario() {
@@ -66,13 +65,13 @@ public class Item {
 		this.proprietario = proprietario;
 	}
 
-	public HashMap<Double, Membro> getLances() {
+	public ArrayList<Lance> getLances() {
 		return lances;
 	}
 
-	public void setLances(HashMap<Double, Membro> lances) {
+	public void setLances(ArrayList<Lance> lances) {
 		this.lances = lances;
 	}
-	
+
 	
 }

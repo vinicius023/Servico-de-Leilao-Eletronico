@@ -13,6 +13,7 @@ public class LeilaoControl {
 
 	private Membro membro;
 	private Counter numSalas;
+	private Sala salaAtual;
 	private ArrayList<Sala> minhasSalas = new ArrayList<>();
 	
 	LeilaoCli leilaoCli = new LeilaoCli();
@@ -53,16 +54,27 @@ public class LeilaoControl {
 				case 2: {
 					// exibe as salas disponiveis
 					salaControl.exibirSalas(this.minhasSalas);
+					if (this.minhasSalas.isEmpty()) {
+						System.out.println("Não existe salas cadastradas!");
+						break;
+					}
 					// escolhe a sala e adiciona o membro nas 'minhasSalas'
-					salaControl.entrarSala(this.membro, this.minhasSalas);
+					this.salaAtual = salaControl.entrarSala(this.membro, this.minhasSalas);
+					if (this.salaAtual.equals(null))
+						System.out.println("Sala não encontrada!");
+					else
+						salaControl.menuSala(this.membro, this.salaAtual);
+					
+					salaControl.atualizaSala(this.minhasSalas, this.salaAtual);
+					break;
 				}
 				// Consultar itens leiloados
 				case 3: {
-
+					break;
 				}
 				// Logout
 				case 4: {
-
+					break;
 				}
 				default: {
 					System.out.println("Digite um valor válido! (0-4)");

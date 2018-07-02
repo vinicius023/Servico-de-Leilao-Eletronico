@@ -3,17 +3,15 @@ package controle;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Date;
 import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import modelo.Item;
 import modelo.Lance;
-import modelo.Leilao;
 import modelo.Membro;
+
 
 public class LanceFile {
 
@@ -39,13 +37,9 @@ public static final String PATH = System.getProperty("user.dir")+"/files/Lances.
 			// Percorre todos os Lances
 			for (int i = 0; i < obJson.size(); i++) {
 				aux = (JSONObject) obJson.get(i);
-				// cria um novo objeto 'Lance' com o dado extraido
 				// adiciona o Lance ao array
-				Lances.add(new Lance(
-						Date.valueOf(aux.get("data").toString()), 
-						Double.parseDouble(aux.get("valor").toString()),
-						Item.getItem(Leilao.getSalas(), aux.get("item").toString()),
-						Membro.getMembro(Leilao.getMembros(), aux.get("membro").toString())));
+				Lances.add(new Lance(new Membro(aux.get("membro").toString()),
+						Double.parseDouble(aux.get("lance").toString())));
 			}
 			return Lances;
 			
@@ -68,10 +62,8 @@ public static final String PATH = System.getProperty("user.dir")+"/files/Lances.
 		for (Lance l : Lances) {
 			jsonObject = new JSONObject();
 			//Armazena dados em um Objeto JSON
-			jsonObject.put("data", l.getData().toString());
-			jsonObject.put("valor", l.getValor());
-			jsonObject.put("item", l.getItem().getNome());
 			jsonObject.put("membro", l.getMembro().getUsuario());
+			jsonObject.put("lance", l.getLance());
 			//Armazena Objeto JSON em um Array JSON
 			obJson.add(jsonObject);
 		}
@@ -106,10 +98,8 @@ public static final String PATH = System.getProperty("user.dir")+"/files/Lances.
 		for (Lance l : Lances) {
 			jsonObject = new JSONObject();
 			//Armazena dados em um Objeto JSON
-			jsonObject.put("data", l.getData().toString());
-			jsonObject.put("valor", l.getValor());
-			jsonObject.put("item", l.getItem().getNome());
-			jsonObject.put("membro", l.getMembro().getUsuario());
+			jsonObject.put("lance", l.getMembro().getUsuario());
+			jsonObject.put("lance", l.getLance());
 			//Armazena Objeto JSON em um Array JSON
 			obJson.add(jsonObject);
 		}
@@ -148,13 +138,10 @@ public static final String PATH = System.getProperty("user.dir")+"/files/Lances.
 				aux = (JSONObject) obJson.get(i);
 //				System.out.println("Usuario: "+aux.get("usuario")+"- Lance: "+Lance.getUsuario()+"\nSenha: "+aux.get("senha"));
 				// garante Lance unico
-				if(aux.get("data").equals(Lance.getData().toString()) &&
-						aux.get("valor").equals(Lance.getValor()) &&
-						aux.get("item").equals(Lance.getItem().getNome()) &&
+				if(aux.get("lance").equals(Lance.getLance()) && 
 						aux.get("membro").equals(Lance.getMembro().getUsuario())) {
 					return true;
 				}
-					
 			}
 			return false;
 		} catch(Exception e) {

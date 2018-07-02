@@ -103,7 +103,7 @@ public class MembroFile {
 		}
 		// Armazena Array JSON em um Objeto JSON
 		aux.put("membros", obJson);
-		System.out.println("VAI escrever");
+		System.out.println("Vai escrever");
 		try {
 			writeFile = new FileWriter(PATH);
 			// Escreve no arquivo conteudo do Objeto JSON
@@ -139,12 +139,12 @@ public class MembroFile {
 				System.out.println("Entro = TAM "+obJson.size());
 				for (int i = 0; i < obJson.size(); i++) {
 					aux = (JSONObject) obJson.get(i);
-					 System.out.println("Usuario: "+aux.get("usuario")+"- Membro");
+					 //System.out.println("Usuario: "+aux.get("usuario")+"- Membro");
 					// "+Membro.getUsuario()+"\nSenha: "+aux.get("senha"));
 					// garante aquele Membro daquele canal
 					if ((aux.get("usuario").equals(membro.getUsuario()))) {
 						// System.out.println("Usuario: "+aux.get("usuario")+" == "+Membro.getUsuario());
-						System.out.println("ACHOU");
+						//System.out.println("ACHOU");
 						return true;
 					}
 				}

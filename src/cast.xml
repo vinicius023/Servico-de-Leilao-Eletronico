@@ -8,10 +8,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="urn:org:jgroups"
         xsi:schemaLocation="urn:org:jgroups http://www.jgroups.org/schema/jgroups.xsd">
-    <MFC max_credits="2M"
-         min_threshold="0.4" />
-    <FRAG2 frag_size="60K" />
-    <COUNTER bypass_bundling="true" timeout="5000" /> <!-- Contador global -->
     <UDP
 
             ucast_recv_buf_size="212K"
@@ -33,6 +29,10 @@
     <pbcast.STATE/>
     <pbcast.GMS/> <!-- Gerenciador do Grupo -->
     <SEQUENCER /> <!-- Ordenação total -->
+    <MFC max_credits="2M"
+         min_threshold="0.4" />
+    <FRAG2 frag_size="60K" />
+    <COUNTER bypass_bundling="true" timeout="5000" /> <!-- Contador global -->
 <!--    
 <ENCRYPT encrypt_entire_message="false" sym_init="128" sym_algorithm="AES/ECB/PKCS5Padding" asym_init="512" asym_algorithm="RSA"/>
     -->
