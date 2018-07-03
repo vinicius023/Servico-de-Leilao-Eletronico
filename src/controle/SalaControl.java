@@ -12,18 +12,31 @@ public class SalaControl {
 
 	private SalaCli salaCli = new SalaCli();
 
-	public Sala novaSala(long numSala, Membro membro) {
+	public Sala novaSala(ArrayList<Sala> salas, long numSala, Membro membro) {
 		// Cadastra novo item
-		Item novoItem = salaCli.cadastrarItem(membro);
+		Item novoItem;
+		boolean sair = false;
+		while(!sair) {
+			novoItem = salaCli.cadastrarItem(membro);
+			
+			for (Sala s : salas) {
+				// garante item unico
+				if(s.getItem().getNome().equals(novoItem.getNome())) {
+					sair = true;
+					break;
+				}
+			}
+			if (sair) {
+				System.out.println("Item já cadastrado!\n");
+				sair = false;
+			}
+			else
+				return new Sala(numSala, membro, novoItem);
+		}
 		// Cria nova sala
-		return new Sala(numSala, membro, novoItem);
+		return null;
 	}
-	
-	public Sala novaSala(long numSala, Membro membro, Item item) {
-		// Cria nova sala		 
-		return new Sala(numSala, membro, item);
-	}
-	
+
 	public Sala entrarSala(Membro membro, ArrayList<Sala> salas) {
 		Integer numEscolhido = salaCli.escolherSala(salas);
 		for (Sala s: salas) {

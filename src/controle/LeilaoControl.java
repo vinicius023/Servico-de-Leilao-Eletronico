@@ -53,7 +53,7 @@ public class LeilaoControl {
 				// Cadastrar novo item / Criar nova sala
 				case 1: {
 					System.out.println("Criando nova sala...");
-					Sala sala = salaControl.novaSala(this.numSalas.addAndGet(1), this.membro);
+					Sala sala = salaControl.novaSala(this.minhasSalas, this.numSalas.addAndGet(1), this.membro);
 					minhasSalas.add(sala);
 					System.out.println("Sala "+sala.getId()+" criada.");
 					break;
